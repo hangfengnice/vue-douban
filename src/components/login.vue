@@ -22,8 +22,8 @@
       </div>
       <div>
         <span>第三方登录:</span>
-        <img src alt />
-        <img src alt />
+        <i class="iconfont icon-wechat"></i>
+        <i class="iconfont icon-xinlang"></i>
       </div>
     </section>
     <!-- <section>
