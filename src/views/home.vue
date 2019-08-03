@@ -19,6 +19,7 @@
           </div>
         </div>
       </div>
+
       <div class="login">
         <Login />
       </div>
@@ -28,7 +29,7 @@
 
 <script>
 import HomeHead from "../components/homeHead";
-import Login from '../components/login'
+import Login from '../components/login/login'
 
 export default {
   name: "home",
@@ -73,7 +74,7 @@ section {
       height: 120px;
       position: absolute;
       top: 75px;
-      right: 20px;
+      right: 50px;
       display: flex;
       flex-direction: column;
       .app-title {
@@ -97,6 +98,7 @@ section {
           height: 30px;
           margin-left: 4px;
           position: relative;
+          z-index: 1;
           .green {
             width: 100%;
             height: 100%;
@@ -131,7 +133,6 @@ section {
     position: absolute;
     right: 20px;
     top: 0;
-    border: 1px solid #000;
   }
 }
 </style>

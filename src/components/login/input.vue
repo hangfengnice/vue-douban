@@ -2,7 +2,7 @@
   <div class="input-index">
     <input type="text" placeholder="电影 音乐 读书" />
     <span>
-      <img src="../assets/images/search.png" alt="">
+      <img src="../../assets/images/search.png" alt="">
     </span>
     
   </div>

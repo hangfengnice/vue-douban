@@ -12,5 +12,8 @@
   color: #2c3e50;
   box-sizing: border-box;
 }
+input{
+  outline: none;
+}
 
 </style>

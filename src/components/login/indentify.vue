@@ -1,13 +1,16 @@
 <template>
 <div class="index">
-  <input type="text" placeholder="验证码">
-  <span>获取验证码</span>
+  <input type="text" :placeholder=" isShow ? '验证码' : '密码'">
+  <span v-if='isShow'>获取验证码</span>
 </div>
 </template>
 
 <script>
 export default {
-name:"index"
+name:"index",
+props: {
+  isShow: Boolean
+}
 }
 </script>
 

@@ -1,13 +1,17 @@
 <template>
 <div class="index">
-  <span>+86</span>
-  <input type="text" placeholder="手机号">
+  <span v-if='isShow'>+86</span>
+  <input type="text" :placeholder=" isShow ? '手机号' : '手机号/邮箱'">
 </div>
 </template>
 
 <script>
 export default {
-name:"loginInput"
+ 
+name:"loginInput",
+ props: {
+   isShow: Boolean
+ }
 }
 </script>
 

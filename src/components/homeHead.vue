@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import Input from "./input";
+import Input from "./login/input";
 
 export default {
   name: "home",

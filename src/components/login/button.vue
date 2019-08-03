@@ -1,10 +1,21 @@
 <template>
-<button>登录豆瓣</button>
+<button :disabled='isdisable' :class='{nodisable: !isdisable}' @click='onClickButton'>登录豆瓣</button>
 </template>
 
 <script>
 export default {
-name:"index"
+name:"index",
+props: {
+  isdisable: Boolean
+},
+created(){
+  console.log(this.isdisable)
+},
+methods: {
+  onClickButton(){
+    console.log(1)
+  }
+}
 }
 </script>
 
@@ -18,5 +29,10 @@ button{
   color: #fff;
   font-size: 15px;
   font-weight: 400;
+  outline: none;
+  cursor: not-allowed;
+}
+.nodisable{
+  background-color: #20af0e;
 }
 </style>
