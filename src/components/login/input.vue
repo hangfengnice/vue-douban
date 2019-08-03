@@ -20,13 +20,14 @@ export default {
   position: relative;
   display: inline-block;
   zoom: 1;
+  background-color: #fff;
   vertical-align: middle;
   width: 270px;
   height: 30px;
   border: 1px solid #c3c3c3;
   padding-right: 36px;
   input {
-    width: 240px;
+    width: 250px;
     border: none;
     font-size: 13px;
     height: 20px;
@@ -34,13 +35,15 @@ export default {
     margin-right: 3px;
     vertical-align: middle;
   }
+
   img{
     position: absolute;
     width: 16px;
     height: 16px;
-    top: 7px;
     right: 0;
-    margin: 0 3px;
+    color: #fff;
+    padding: 7px 10px;
+    background: rgb(150, 150, 150);
   }
 }
 </style>

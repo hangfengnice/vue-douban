@@ -82,11 +82,10 @@ data(){
     }
   }
   .movie_year{
-    position: fixed;
     height: 96px;
     width: 186px;
     padding-left: 620px;
-    top: 36px;
+    margin-top: -96px;
   }
 }
 </style>

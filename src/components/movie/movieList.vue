@@ -2,16 +2,16 @@
 <div class="movie_list_container">
   <div class="inner_container">
     <div class="movie_head">
-      <span class="solgan">{{movies.title}}</span>
-      <div catch:tap='onMoretap' class="more" data="movies.title">
+      <span class="solgan">正在上映</span>
+      <div  class="more" data="movies.title">
         <span  class="more_span">更多</span>
-        <img class="more_img" src="/imgs/icon/arrow-right.png" />
+        <img class="more_img" src="../../assets/images/icon/arrow-right.png" />
       </div>
-    </div>x
+    </div>
   </div>
 
   <div class="moives_container">
-        <!-- <Movie v-for='(item,index) of movies.movies' :key='index'  movie='item'></Movie> -->
+      <Movie v-for='(item, index) of movies' :key='index' :movie='item'></Movie>
   </div>
  
 </div>
@@ -26,50 +26,55 @@ name:"index",
 props: {
   movies: Array
 },
-componnets: {
+components: {
   Movie
+},
+created(){
+  console.log(this.movies)
 }
 }
 </script>
 
 <style lang='scss' scoped>
-.moive_list_container{
+.movie_list_container{
   background-color: #fff;
   display: flex;
   flex-direction: column;
+  width: 675px;
 }
-
 
 .inner_container{
-  padding: 20px;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
 }
-
 .movie_head{
-  padding: 30px 20px 22px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .solgan{
-  font-size: 24px;
+  font-size: 16px;
+  margin-left: 16px;
 }
 
 .more{
-  float: right;
+  font-size: 13px;
 }
 
 .more_text{
   vertical-align: middle;
   margin-right: 10px;
 }
-
 .more_img{
+  padding-left: 8px;
   width: 9px;
-  height:  16px;
-  vertical-align: middle;
+  height:  12px;
 }
-
 .moives_container{
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 </style>
