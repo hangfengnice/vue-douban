@@ -1,23 +1,22 @@
 <template>
-<div class='movie_container' @click="$router.push('/movie/detail/'+ movie.id)">
-  <img class='movie_img' :src="movie.coverageUrl" />
-  <span class='movie_title'>{{movie.title}}</span>
-  <Stars :stars='movie.stars' :average='movie.average'></Stars>
-  <button>选座购票</button>
+<div class='movie_container' @click="$router.push('/read/detail/'+ read.id)">
+  <img class='movie_img' :src='read.img'  />
+  <span class='movie_title'>{{read.title}}</span>
+  <span class='book_author'>{{read.author}}</span>
+  <button>免费试读</button>
 </div>
 </template>
 
 <script>
-import Stars from './stars'
 
 export default {
 
 name:"index",
 props: {
-  movie: Object
+  read: Object
 },
 components: {
-  Stars
+
 }
 }
 </script>
@@ -34,7 +33,7 @@ components: {
     width: 90px;
     height: 24px;
     margin: 14px 12.5px 0;
-    background-color: rgb(42, 129, 206);
+    background-color: rgb(169, 177, 184);
     color:#fff;
     border-radius: 4px;
   }
@@ -49,6 +48,9 @@ components: {
 .movie_title{
   font-size: 14px;
   margin-bottom: 8px;
+}
+.book_author{
+  font-size: 14px;
 }
 
 

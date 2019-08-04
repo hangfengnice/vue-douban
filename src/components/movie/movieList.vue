@@ -2,8 +2,8 @@
 <div class="movie_list_container">
   <div class="inner_container">
     <div class="movie_head">
-      <span class="solgan">正在上映</span>
-      <div  class="more" data="movies.title">
+      <span class="solgan">{{movies.category}}</span>
+      <div @click.stop="OnMoreMovie"  class="more" data="movies.title">
         <span  class="more_span">更多</span>
         <img class="more_img" src="../../assets/images/icon/arrow-right.png" />
       </div>
@@ -11,7 +11,7 @@
   </div>
 
   <div class="moives_container">
-      <Movie v-for='(item, index) of movies' :key='index' :movie='item'></Movie>
+      <Movie v-for='(item, index) of movies.movies' :key='index' :movie='item'></Movie>
   </div>
  
 </div>
@@ -24,10 +24,15 @@ import Movie from './movie'
 export default {
 name:"index",
 props: {
-  movies: Array
+  movies: Object
 },
 components: {
   Movie
+},
+methods: {
+  OnMoreMovie(){
+    this.$router.push('/movie/moreMovie/' + this.movies.category)
+  }
 },
 created(){
   console.log(this.movies)

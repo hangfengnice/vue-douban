@@ -14,9 +14,6 @@ export default {
     average: Number,
     stars: Array
   },
-  created(){
-    console.log(this.stars)
-  },
   data() {
     return {
       fullStar: require("../../assets/images/icon/star.png"),

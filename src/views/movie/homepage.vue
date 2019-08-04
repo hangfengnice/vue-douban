@@ -1,45 +1,38 @@
 <template>
   <div class="index">
-    <Header />
-    <Article />
-    <MovieList class='movieList' :movies='inTheaters'/>
     <MovieList class='movieList' :movies='comingSoon'/>
     <MovieList class='movieList' :movies='top250'/>
+    <MovieList class='movieList' :movies='inTheaters'/>
    </div>
 </template>
 
 <script>
-import {coming} from '../assets/data/comming_soon'
-import {top250} from '../assets/data/top30 '
-import {intheaters} from '../assets/data/in_theaters'
-import Header from '../components/movie/header'
-import Article from '../components/movie/article'
-import MovieList from '../components/movie/movieList'
-import {converToStarsArray} from '../utils/utils'
+import {coming} from '../../assets/data/comming_soon'
+import {top250} from '../../assets/data/top30 '
+import {intheaters} from '../../assets/data/in_theaters'
+import {converToStarsArray} from '../../utils/utils'
+import MovieList from '../../components/movie/movieList'
 
 export default {
-name:"movie",
+name:"movieHomepage",
 components: {
-  Header,
-  Article,
   MovieList
 },
 data(){
   return {
-    inTheaters: [],
-    comingSoon: [],
-    top250: []
+    inTheaters: {},
+    comingSoon: {},
+    top250: {}
   }
 },
 created(){
-this.$axios('/api/movie/in_theaters').then(res => {
-  console.log(res.data)
+this.$axios('/api/movie/in_theaters?city=杭州&count=5').then(res => {
 this.processDoubanData(res.data, 'inTheaters')
 })
-this.$axios('/api//movie/top250').then(res => {
+this.$axios('/api//movie/top250?start=0&count=5').then(res => {
 this.processDoubanData(res.data, 'top250')
 })
-this.$axios('/api/movie/coming_soon').then(res => {
+this.$axios('/api/movie/coming_soon?start=0&count=5').then(res => {
 this.processDoubanData(res.data, 'comingSoon')
 })
 
@@ -63,13 +56,20 @@ methods: {
       }
       movies.push(temp)
     }
-    this[setKey] = movies
+    this[setKey] = {
+      movies,
+      category : data.title
+    }
   }
 }
 }
 </script>
 
 <style lang='scss' scoped>
+.index{
+  width: 1040px;
+  margin: 0 auto;
+}
 .movieList{
   margin-top: 40px;
 }

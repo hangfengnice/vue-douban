@@ -1,21 +1,26 @@
 <template>
   <div class="index">
     <div class="head_title">
-      <span v-for="(item, index) of tags" :key="index">{{item.title}}</span>
+      <router-link
+        tag="span"
+        v-for="(item, index) of tags"
+        :to="item.path"
+        :key="index"
+      >{{item.title}}</router-link>
     </div>
     <div @mouseenter="showHideImg" @mouseleave="hideImg">
       <span class="downLoad">
         下载豆瓣客户端
         <div v-if="showHideImgBottom" class="hideImg">
-          <img class="doubanBig" src="../../assets/images/doubanBig.png" alt />
+          <img class="doubanBig" src="../assets/images/doubanBig.png" alt />
           <span class="douban">豆瓣</span>
-          <img class="doubanBig1" src="../../assets/images/doubanBig1.png" alt />
+          <img class="doubanBig1" src="../assets/images/doubanBig1.png" alt />
           <span class="iphone">iPhone · Android</span>
         </div>
       </span>
     </div>
 
-    <span @click="$router.push('/login')">登录/注册</span>
+    <span class="headLogin" @click="$router.push('/login')">登录/注册</span>
   </div>
 </template>
 
@@ -73,7 +78,9 @@ export default {
           class: "market"
         },
         {
-          title: "更多"
+          title: "更多",
+          path: "",
+          class: ""
         }
       ]
     };
@@ -91,15 +98,14 @@ export default {
 
 <style lang='scss' scoped>
 .index {
-  min-width: 1024px;
   height: 28px;
   display: flex;
+  min-width:750px;
   align-items: center;
   font-size: 12px;
   justify-content: space-between;
   color: #d5d5d5;
   background-color: rgb(85, 87, 83);
-  padding-right: 30px;
   .head_title {
     display: flex;
     flex: 1;
@@ -144,6 +150,10 @@ export default {
       color: #379;
       background-color: #ccc;
     }
+    
   }
+  .headLogin {
+      padding-right: 30px;
+    }
 }
 </style>
