@@ -27,6 +27,7 @@ export default {
 .star_container {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 .stars {
   display: flex;

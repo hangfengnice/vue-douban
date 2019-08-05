@@ -45,7 +45,7 @@
         <SummaryAuthorContent :wrap="content" />
         <Tracks :tracks="tracks" />
       </div>
-    <!-- 右边 -->
+      <!-- 右边 -->
       <div class="detail_right">
         <CommonTags :tags="tags" />
       </div>
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { musicDetail8 } from "../../assets/data/music/detail";
 import {
   http,
   converTocastString,
@@ -83,19 +84,19 @@ export default {
       musicWrap: [
         {
           content: "写短评",
-          icon: 'icon-xiaoxi'
+          icon: "icon-xiaoxi"
         },
         {
           content: "写乐评",
-          icon: 'icon-pencil'
+          icon: "icon-pencil"
         },
-         {
+        {
           content: "加入豆列",
-          icon: 'icon-jiahao'
+          icon: "icon-jiahao"
         },
         {
           content: "分享到",
-          icon: 'icon-f11'
+          icon: "icon-f11"
         }
       ]
     };
@@ -111,8 +112,7 @@ export default {
   },
   created() {
     const id = this.$route.params.id;
-    const url = "/api/music/" + id;
-    http(url, this.processDoubanData);
+    this.processDoubanData(musicDetail8[id]);
   },
   methods: {
     processDoubanData(data) {
@@ -120,14 +120,14 @@ export default {
       if (!data) {
         return;
       }
-      let tags = []
+      let tags = [];
       const len = data.tags.length;
       for (var i = 0; i < len; i++) {
         tags.push(data.tags[i].name);
       }
       this.music = {
         author: data.author && data.author[0].name,
-        publisher: data.attrs && data.attrs.publisher[0],
+        publisher: data.attrs.publisher && data.attrs.publisher[0],
         alt_title: data.alt_title,
         image: data.image,
         liupai: data.attrs && data.attrs.title[0],
@@ -146,7 +146,7 @@ export default {
       };
       this.author = { title: "作者简介" };
       this.tracks = data.attrs.tracks[0].split("\n");
-      this.tags = tags
+      this.tags = tags;
     }
   }
 };
@@ -207,7 +207,6 @@ export default {
 
     .detail_right {
       width: 300px;
-
     }
   }
 }

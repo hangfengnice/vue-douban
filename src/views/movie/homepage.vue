@@ -1,12 +1,11 @@
 <template>
   <div class="index">
-    <MovieList class='movieList' :movies='comingSoon'/>
     <MovieList class='movieList' :movies='top250'/>
-    <MovieList class='movieList' :movies='inTheaters'/>
    </div>
 </template>
 
 <script>
+import {movieTop5} from '../../assets/data/movie/movie'
 import {converToStarsArray} from '../../utils/utils'
 import MovieList from '../../components/movie/movieList'
 
@@ -17,25 +16,14 @@ components: {
 },
 data(){
   return {
-    inTheaters: {},
-    comingSoon: {},
     top250: {}
   }
 },
 created(){
-this.$axios('/api/movie/in_theaters?city=杭州&count=1').then(res => {
-this.processDoubanData(res.data, 'inTheaters')
-})
-this.$axios('/api//movie/top250?start=0&count=1').then(res => {
-this.processDoubanData(res.data, 'top250')
-})
-this.$axios('/api/movie/coming_soon?start=0&count=1').then(res => {
-this.processDoubanData(res.data, 'comingSoon')
-})
-
+this.processDoubanData(movieTop5)
 },
 methods: {
-  processDoubanData(data, setKey){
+  processDoubanData(data){
     console.log(data)
     var movies = []
     for(var idx in data.subjects){
@@ -53,7 +41,7 @@ methods: {
       }
       movies.push(temp)
     }
-    this[setKey] = {
+    this.top250= {
       movies,
       category : data.title
     }

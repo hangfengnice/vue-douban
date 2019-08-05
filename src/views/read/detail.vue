@@ -76,6 +76,8 @@
 </template>
 
 <script>
+import {bookBianChenDetail5} from '../../assets/data/read/detail'
+import {bookComments5} from '../../assets/data/read/comments'
 import {
   http,
   converTocastString,
@@ -138,10 +140,8 @@ export default {
   },
   created() {
     const id = this.$route.params.id;
-    const url = "/api/book/" + id;
-    const chatUrl = `/api/book/${id}/comments?start=621&count=10`;
-    http(url, this.processDoubanData);
-    http(chatUrl, this.processChatData);
+    this.processDoubanData(bookBianChenDetail5[id]);
+    this.processChatData(bookComments5)
   },
   methods: {
     processDoubanData(data) {

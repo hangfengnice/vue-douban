@@ -4,7 +4,7 @@
     <div class="movie_head">
       <span class="solgan">{{movies.category}}</span>
       <div @click.stop="OnMoreMovie"  class="more" data="movies.title">
-        <span  class="more_span">更多</span>
+        <span class="more_span">更多</span>
         <img class="more_img" src="../../assets/images/icon/arrow-right.png" />
       </div>
     </div>
@@ -31,7 +31,11 @@ components: {
 },
 methods: {
   OnMoreMovie(){
-    this.$router.push('/movie/moreMovie/' + this.movies.category)
+    this.$notify.warning({
+      title: "温馨提示",
+      message: '非常抱歉,由于接口的问题,该功能尚未实现',
+      duration: 2500
+    })
   }
 },
 created(){

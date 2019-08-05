@@ -179,7 +179,6 @@ img.from_img {
     font-size: 12px;
     margin-right: 50px;
     border-top: 1px solid #ccc;
-    padding-top: 16px;
     .icon-wechat {
       color: #41ac52;
       padding: 6px 0 0 12px;

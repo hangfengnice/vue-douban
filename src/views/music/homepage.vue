@@ -32,23 +32,23 @@
         </div>
 
         <div>
-          <div class='tag'>
+          <div class="tag">
             <span>流行</span>
             <span>轻音乐</span>
           </div>
-          <div class='tag'>
+          <div class="tag">
             <span>摇滚</span>
             <span>古典</span>
           </div>
-          <div class='tag'>
+          <div class="tag">
             <span>电子</span>
             <span>世界音乐</span>
           </div>
-          <div class='tag'>
+          <div class="tag">
             <span>民谣</span>
             <span>说唱</span>
           </div>
-          <div class='tag'>
+          <div class="tag">
             <span>爵士</span>
             <span>原生</span>
           </div>
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import { musicHomePage8 } from "../../assets/data/music/music";
 import MusicList from "../../components/music/musicList";
 
 export default {
@@ -72,16 +73,13 @@ export default {
     MusicList
   },
   created() {
-    this.$axios("/api/music/search?q=流行&start=0&count=8").then(res => {
-      this.processDoubanData(res.data);
-    });
+    this.processDoubanData(musicHomePage8);
   },
   methods: {
     processDoubanData(data) {
       console.log(data);
       const musics = data.musics;
       var musicList = [];
-
       for (var idx in musics) {
         var subject = musics[idx];
         var title = subject.title;
@@ -172,11 +170,11 @@ export default {
         font-size: 13px;
       }
     }
-    .tag{
+    .tag {
       display: flex;
       align-items: center;
-      span{
-        flex:1;
+      span {
+        flex: 1;
         height: 36px;
         line-height: 36px;
         margin-top: -1px;
@@ -186,14 +184,13 @@ export default {
         border: 1px solid #eee;
         margin-right: -1px;
       }
-      span:first-child{
+      span:first-child {
         border-left: none;
       }
-      span:hover{
+      span:hover {
         background: rgb(242, 248, 241);
         border: none;
       }
-      
     }
   }
 }

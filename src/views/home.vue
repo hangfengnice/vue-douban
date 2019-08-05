@@ -19,19 +19,31 @@
           </div>
         </div>
       </div>
-
       <div class="login">
         <Login />
       </div>
     </section>
-    
-
+    <!-- book -->
+    <div class='threediv'>
+      <BookList />
+    </div>
+    <!-- music -->
+    <div class='threediv'>
+      <MusicList />
+    </div>
+    <!-- movie -->
+    <div class='threediv'>
+      <MovieList />
+    </div>
   </div>
 </template>
 
 <script>
 import HomeHead from "../components/homeHead";
-import Login from '../components/login/login'
+import Login from "../components/login/login";
+import MovieList from "./movie/homepage";
+import MusicList from "./music/homepage";
+import BookList from "./read/homepage";
 
 export default {
   name: "home",
@@ -42,7 +54,10 @@ export default {
   },
   components: {
     HomeHead,
-    Login
+    Login,
+    MovieList,
+    MusicList,
+    BookList
   },
 
   methods: {
@@ -136,5 +151,10 @@ section {
     right: 20px;
     top: 0;
   }
+}
+.threeSection{
+  background-color: #edf4ed;
+  width: 950;
+  margin: 0 auto;
 }
 </style>

@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import {bookBianChen5} from '../../assets/data/read/book'
 import { converToStarsArray } from "../../utils/utils";
 import ReadList from "../../components/read/readList";
 
@@ -27,9 +28,7 @@ export default {
     ReadList
   },
   created() {
-    this.$axios("/api/book/search?q=编程&start=0&count=5").then(res => {
-      this.processDoubanData(res.data);
-    });
+    this.processDoubanData(bookBianChen5);
   },
   methods: {
     processDoubanData(data) {

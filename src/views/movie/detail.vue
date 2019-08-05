@@ -17,41 +17,41 @@
 
       <!-- summary -->
       <div class="summary">
-    <div class="original-title">
-      <span>{{movie.originalTitle}}</span>
-    </div>
-    <div class="flex-row">
-      <span class="mark">评分</span>
-      <Star :average='movie.score' :stars='movie.stars' />
-    </div>
-    <div class="flex-row">
-      <span class="mark">导演</span>
-      <span>{{ movie.director && movie.director.name}}</span>
-    </div>
-    <div class="flex-row">
-      <span class="mark">影人</span>
-      <span>{{movie.casts}}</span>
-    </div>
-    <div class="flex-row">
-      <span class="mark">类型</span>
-      <span>{{movie.generes}}</span>
-    </div>
+        <div class="original-title">
+          <span>{{movie.originalTitle}}</span>
+        </div>
+        <div class="flex-row">
+          <span class="mark">评分</span>
+          <Star :average="movie.score" :stars="movie.stars" />
+        </div>
+        <div class="flex-row">
+          <span class="mark">导演</span>
+          <span>{{ movie.director && movie.director.name}}</span>
+        </div>
+        <div class="flex-row">
+          <span class="mark">影人</span>
+          <span>{{movie.casts}}</span>
+        </div>
+        <div class="flex-row">
+          <span class="mark">类型</span>
+          <span>{{movie.generes}}</span>
+        </div>
       </div>
       <!-- line -->
       <div class="hr"></div>
       <!-- 剧情简介 -->
       <div class="synopsis">
-    <span class='synopsis-font'>剧情简介</span>
-    <span class="summary-content">{{movie.summary}}</span>
+        <span class="synopsis-font">剧情简介</span>
+        <span class="summary-content">{{movie.summary}}</span>
       </div>
       <!-- line -->
       <div class="hr"></div>
       <!-- cast 演员表 -->
-     <div class="cast">
-      <span class='cast-font'>影人</span>
-        <div class="cast-container"> 
-          <div class='cast_imgs' v-for='(item, index) of movie.castsInfo' :key='index'>
-            <img class="cast-img" :src='item.img' />
+      <div class="cast">
+        <span class="cast-font">影人</span>
+        <div class="cast-container">
+          <div class="cast_imgs" v-for="(item, index) of movie.castsInfo" :key="index">
+            <img class="cast-img" :src="item.img" />
             <span class="cast-name">{{item.name}}</span>
           </div>
         </div>
@@ -61,13 +61,14 @@
 </template>
 
 <script>
+import { movieDetail5 } from "../../assets/data/movie/detail";
 import {
   converToStarsArray,
   http,
   converTocastString,
   convertToCastInfos
 } from "../../utils/utils";
-import Star from '../../components/movie/stars'
+import Star from "../../components/movie/stars";
 
 export default {
   name: "movieDetail",
@@ -81,8 +82,7 @@ export default {
   },
   created() {
     const id = this.$route.params.id;
-    const url = "/api/movie/subject/" + id;
-    http(url, this.processDoubanData);
+    this.processDoubanData(movieDetail5[id]);
   },
   methods: {
     processDoubanData(data) {
@@ -127,7 +127,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.index{
+.index {
   padding: 26px 0 0 70px;
 }
 .container {
@@ -273,7 +273,7 @@ export default {
   white-space: normal;
 }
 
-.cast_imgs{
+.cast_imgs {
   margin-right: 20px;
 }
 .cast-img {
