@@ -57,7 +57,7 @@
           <DoubanRate :book="bookRate" />
         </div>
         <InsertRateStar />
-        <WriteShare />
+        <WriteShare :contentIcon='bookWrap' />
         <SummaryAuthorContent :wrap="content" />
         <ReadOnline />
         <SummaryAuthorContent :wrap="author" />
@@ -103,7 +103,25 @@ export default {
       category: {},
       tags: [],
       comments: [],
-      commentsSticky: []
+      commentsSticky: [],
+      bookWrap: [
+        {
+          content: "写笔记",
+          icon: 'icon-pencil'
+        },
+        {
+          content: "写书评",
+          icon: 'icon-pencil'
+        },
+         {
+          content: "加入购书单",
+          icon: 'icon-renminbi'
+        },
+        {
+          content: "分享到",
+          icon: 'icon-f11'
+        }
+      ]
     };
   },
   components: {

@@ -1,14 +1,10 @@
 <template>
   <div class="write_share">
     <div class="write_share_left">
-      <i class="iconfont icon-pencil"></i>
-      <span>写笔记</span>
-      <i class="iconfont icon-pencil"></i>
-      <span>写书评</span>
-      <i class="iconfont icon-renminbi"></i>
-      <span>加入购书单</span>
-      <span>分享到</span>
-      <i class="iconfont icon-f11"></i>
+      <div v-for="(item,index) of contentIcon" :key="index">
+        <i :class="['iconfont', item.icon]"></i>
+        <span>{{item.content}}</span>
+      </div>
     </div>
     <button>推荐</button>
   </div>
@@ -16,12 +12,19 @@
 
 <script>
 export default {
-  name: "writeShare"
+  name: "writeShare",
+  props: {
+    contentIcon: Array
+  },
+  creatde(){
+    console.log(this.contentIcon)
+  }
 };
 </script>
 
 <style lang='scss' scoped>
 .write_share {
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   font-size: 11px;
@@ -41,6 +44,13 @@ export default {
       font-size: 13px;
       color: #37a;
     }
+    span:hover{
+      color: #fff;
+      background-color: #37a;
+    }
+    // span:last-child:hover{
+    //   text-decoration: #fff;
+    // }
   }
 
   button {

@@ -4,7 +4,10 @@
       <h2>豆瓣成员常用的标签(共207个)</h2>
       <span>· · · · · ·</span>
     </div>
-    <span class='tag' v-for="(item, index) of tags" :key="index">{{item}}</span>
+
+    <div class="tags">
+      <span class="tag" v-for="(item, index) of tags" :key="index">{{item}}</span>
+    </div>
   </div>
 </template>
 
@@ -14,26 +17,31 @@ export default {
   props: {
     tags: Array
   },
-  created(){
-    console.log(this.tags)
+  created() {
+    console.log(this.tags);
   }
 };
 </script>
 
 <style lang='scss' scoped>
 .tags_detail {
-  .content{
+  width: 100%;
+  .content {
     display: flex;
     margin: 16px 0 0;
     color: #072;
   }
-  .tag {
-    color: #37a;
-    background-color: #f5f5f5;
-    margin: 0 5px 5px 0;
-    font-size: 13px;
-    padding: 2px 11px 0;
-    border-radius: 3px;
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    .tag {
+      color: #37a;
+      background-color: #f5f5f5;
+      margin: 0 5px 5px 0;
+      font-size: 13px;
+      padding: 2px 11px 0;
+      border-radius: 3px;
+    }
   }
 }
 </style>

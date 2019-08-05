@@ -1,6 +1,6 @@
 <template>
 <div class="readlist_wrap">
-<!-- <Music v-for='(item, index) of readList' :key='index' :read='item'/> -->
+<Music v-for='(item, index) of musicList' :key='index' :music='item'/>
 </div>
 </template>
 
