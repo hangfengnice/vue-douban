@@ -1,5 +1,5 @@
 <template>
-<div class="rate">
+<div class="rate_star_meter">
 <span class='rate_title'>{{rate.title}}</span>
 <meter class='rate_meter' min='0' low='80' max='100' :value='rate.meter' optimum="80"></meter>
 <span class='rate_chance'>{{rate.chance}}%</span>
@@ -17,11 +17,12 @@ props: {
 </script>
 
 <style lang='scss' scoped>
-.rate{
+.rate_star_meter{
   margin: 4px 0 6px;
   font-size: 12px;
   color: #9b9b9b;
   display: flex;
+  align-items: center;
   .rate_title{
     min-width: 19px;
   }

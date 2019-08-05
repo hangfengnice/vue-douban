@@ -7,6 +7,7 @@
 <style lang="scss">
 #app {
   box-sizing: border-box;
+  line-height: 1.62;
 }
 input{
   outline: none;

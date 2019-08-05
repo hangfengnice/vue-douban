@@ -1,14 +1,15 @@
 <template>
   <article class="index">
     <div class="wrap">
-      <div class="movie_input" >
-        <img @click='moveToHomepage'  class="movie_img" :src="imgUrl" alt />
+      <div class="movie_input">
+        <img @click="moveToHomepage" class="movie_img" :src="imgUrl" alt />
         <Input />
       </div>
+
       <div class="movie_title">
         <span v-for="(item, index) of titles" :key="index">{{item.title}}</span>
+        <img class="movie_year" :src="yearUrl" alt />
       </div>
-      <img class="movie_year" :src="yearUrl" alt />
     </div>
   </article>
 </template>
@@ -27,13 +28,11 @@ export default {
     Input
   },
   data() {
-    return {
-      
-    };
+    return {};
   },
   methods: {
-    moveToHomepage(){
-      this.$router.push('/movie')
+    moveToHomepage() {
+      this.$router.push("/movie");
     }
   }
 };
@@ -59,10 +58,13 @@ export default {
     height: 26px;
     padding: 15px 50px 20px 10px;
   }
+
   .movie_title {
-    min-width: 700px;
-    border-top: 1px solid #ccc;
+    position: relative;
     padding: 9px 0 0;
+    white-space: nowrap;
+    background-color: rgb(240, 243, 245);
+
     span {
       font-size: 14px;
       color: #47a;
@@ -71,12 +73,13 @@ export default {
     span:first-child {
       margin-left: 10px;
     }
-  }
-  .movie_year {
-    height: 96px;
-    width: 186px;
-    padding-left: 620px;
-    margin-top: -96px;
+    .movie_year {
+      height: 96px;
+      width: 186px;
+      position: absolute;
+      top: -62px;
+      background-color: rgb(240, 243, 245);
+    }
   }
 }
 </style>

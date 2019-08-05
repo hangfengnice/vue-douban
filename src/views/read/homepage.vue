@@ -1,17 +1,14 @@
 <template>
   <div class="index">
-    <div class='read_left'>
-      <div class='left_head'>
-        <span class='head_newBook'>新书速递</span>
-        <span class='head_more'>更多 >></span>
+    <div class="read_left">
+      <div class="left_head">
+        <span class="head_newBook">新书速递</span>
+        <span class="head_more">更多 >></span>
       </div>
-        <ReadList :readList="readList" />
+      <ReadList :readList="readList" />
     </div>
 
-
-    <div class='read_right'>
-
-    </div>
+    <div class="read_right"></div>
   </div>
 </template>
 
@@ -30,7 +27,7 @@ export default {
     ReadList
   },
   created() {
-    this.$axios("/api/book/search?q=编程&start=0&count=10").then(res => {
+    this.$axios("/api/book/search?q=编程&start=0&count=5").then(res => {
       this.processDoubanData(res.data);
     });
   },
@@ -65,21 +62,20 @@ export default {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  .left_head{
+  .left_head {
     margin-bottom: 20px;
     padding-bottom: 8px;
     border-bottom: 1px solid #ccc;
-    .head_newBook{
+    .head_newBook {
       font-size: 18px;
       color: #111;
       font-weight: 600;
     }
-    .head_more{
+    .head_more {
       font-size: 13px;
       color: #37a;
       margin-left: 16px;
     }
   }
-  
 }
 </style>

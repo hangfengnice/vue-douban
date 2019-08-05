@@ -54,103 +54,76 @@
               </span>
             </div>
           </div>
-
-          <div class="star">
-            <span class="star_rate">豆瓣评分</span>
-            <div class="rate_star_review">
-              <strong>{{book.rating && book.rating.average}}</strong>
-              <div class="star_review">
-                <Stars :stars="book.stars" />
-                <span>{{book.rating && book.rating.numRaters}}人评价</span>
-              </div>
-            </div>
-            <Rating v-for="(item, index) of rating" :key="index" :rate="item" />
-          </div>
+          <DoubanRate :book="bookRate" />
         </div>
-
-        <div class="insert_rate_star">
-          <button>想读</button>
-          <button>在读</button>
-          <button>读过</button>
-          <div class="el_rate">
-            <span>评价:</span>
-            <el-rate :texts="texts" show-text></el-rate>
-          </div>
-        </div>
-
-        <div class="write_share">
-          <div class="write_share_left">
-            <i class="iconfont icon-pencil"></i>
-            <span>写笔记</span>
-            <i class="iconfont icon-pencil"></i>
-            <span>写书评</span>
-            <i class="iconfont icon-renminbi"></i>
-            <span>加入购书单</span>
-            <span>分享到</span>
-            <i class="iconfont icon-f11"></i>
-          </div>
-          <button>推荐</button>
-        </div>
+        <InsertRateStar />
+        <WriteShare />
+        <SummaryAuthorContent :wrap="content" />
+        <ReadOnline />
+        <SummaryAuthorContent :wrap="author" />
+        <SummaryAuthorContent :wrap="category" />
+        <CommonTags :tags="tags" />
+        <CommentChat v-for="(item, index) of comments" :comment="item" :key="index" />
       </div>
-
-      <div class="detail_right"></div>
+      <!-- 右边 -->
+      <div class="detail_right">
+        <WhereBuy />
+        <WhoRead :commentsSticky='commentsSticky'/>
+      </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import {
-  converToStarsArray,
   http,
   converTocastString,
   convertToCastInfos
 } from "../../utils/utils";
-import Stars from "../../components/movie/stars";
-import Rating from "../../components/read/rate";
+import DoubanRate from "../../components/detailPage/doubanRate";
+import InsertRateStar from "../../components/detailPage/insertRateStar";
+import WriteShare from "../../components/detailPage/writeShare";
+import SummaryAuthorContent from "../../components/detailPage/summaryAuthorContent";
+import ReadOnline from "../../components/detailPage/readOnline";
+import CommonTags from "../../components/detailPage/commonTags";
+import CommentChat from "../../components/detailPage/commonChat/commentsChat";
+import Footer from "../../components/detailPage/footer";
+import WhereBuy from "../../components/detailPage/right/whereBuy";
+import WhoRead from "../../components/detailPage/right/whoRead";
 
 export default {
   name: "movieDetail",
   data() {
     return {
       book: {},
-      rating: [
-        {
-          title: "5星",
-          meter: 66,
-          chance: "66.1"
-        },
-        {
-          title: "4星",
-          meter: 27,
-          chance: "27.4"
-        },
-        {
-          title: "3星",
-          meter: 6,
-          chance: "5.9"
-        },
-        {
-          title: "2星",
-          meter: 0,
-          chance: "0.4"
-        },
-        {
-          title: "1星",
-          meter: 0,
-          chance: "0.2"
-        }
-      ],
-      texts: ["很差", "较差", "还行", "推荐", "力荐"]
+      bookRate: {},
+      content: {},
+      author: {},
+      category: {},
+      tags: [],
+      comments: [],
+      commentsSticky: []
     };
   },
   components: {
-    Stars,
-    Rating
+    DoubanRate,
+    InsertRateStar,
+    WriteShare,
+    SummaryAuthorContent,
+    ReadOnline,
+    CommonTags,
+    CommentChat,
+    Footer,
+    WhereBuy,
+    WhoRead
   },
   created() {
     const id = this.$route.params.id;
     const url = "/api/book/" + id;
+    const chatUrl = `/api/book/${id}/comments?start=621&count=10`;
     http(url, this.processDoubanData);
+    http(chatUrl, this.processChatData);
   },
   methods: {
     processDoubanData(data) {
@@ -165,12 +138,38 @@ export default {
       for (var i = 0; i < len; i++) {
         tags.push(data.tags[i].name);
       }
-      data.tags = tags;
-      const starNum = data.rating.average / 2;
-      data.stars = converToStarsArray(starNum);
       data.translator = data.translator[0];
-      console.log(data);
       this.book = data;
+      this.bookRate = {
+        average: data.rating.average,
+        numRaters: data.rating.numRaters,
+        score: Number(data.rating.average / 2)
+      };
+      this.content = {
+        title: "内容简介",
+        summary: data.summary
+      };
+      this.author = { title: "作者简介" };
+      this.category = { title: "目录" };
+      this.tags = tags;
+    },
+    processChatData(data) {
+      console.log(data);
+      const comments = data.comments;
+      this.comments = data.comments;
+      var temp = []
+      for(let idx in comments){
+        if(idx){
+          var author = {
+            name: comments[idx].author.name,
+            avatar: comments[idx].author.avatar,
+            published: comments[idx].published
+          }
+        }
+        temp.push(author)
+      }
+      
+      this.commentsSticky = temp
     }
   }
 };
@@ -191,7 +190,8 @@ export default {
     display: flex;
     justify-content: space-between;
     .detail_left {
-      min-width: 675px;
+      width: 675px;
+      box-sizing: border-box;
       .book_star {
         display: flex;
         margin: 0 0 15px;
@@ -225,94 +225,15 @@ export default {
             }
           }
         }
-        .star {
-          margin: 2px 0 0;
-          padding: 0 0 0 15px;
-          .star_rate {
-            font-size: 12px;
-            color: #9b9b9b;
-          }
-          .rate_star_review {
-            padding: 10px 0;
-            display: flex;
-            strong {
-              color: #494949;
-              min-width: 30%;
-              font-size: 28px;
-              margin-right: 8px;
-            }
-            .star_review {
-              display: flex;
-              flex-direction: column;
-              justify-content: flex-start;
-              span {
-                color: #37a;
-                margin-top: 8px;
-                font-size: 12px;
-              }
-            }
-          }
-        }
-      }
-      .insert_rate_star {
-        display: flex;
-        padding: 20px 0 3px;
-        button {
-          height: 24px;
-          padding-right: 7px;
-          font: normal 12px sans-serif;
-          margin-right: 10px;
-          color: #111;
-          cursor: pointer;
-          border-radius: 4px;
-          background-color: rgb(249, 238, 212);
-        }
-        .el_rate {
-          display: flex;
-          align-items: center;
-          span {
-            font-size: 13px;
-            padding-right: 6px;
-          }
-        }
-      }
-      .write_share {
-        display: flex;
-        justify-content: space-between;
-        font-size: 11px;
-        .write_share_left {
-          display: flex;
-          align-items: flex-end;
-          i {
-            font-size: 11px;
-            color: #ccc;
-          }
-          i:last-child {
-            margin-left: -8px;
-            font-size: 16px;
-          }
-          span {
-            padding: 0 8px 0 3px;
-            font-size: 13px;
-            color: #37a;
-          }
-        }
-
-        button {
-          color: #4f946e;
-          background-color: #f2f8f2;
-          padding: 0 8px;
-          border-radius: 3px;
-          border: 1px solid #e3f1ed;
-        }
-        button:hover {
-          border-color: #b9dcd0;
-        }
       }
     }
 
     .detail_right {
       min-width: 300px;
+      .whoRead {
+        position: sticky;
+        top: 0;
+      }
     }
   }
 }

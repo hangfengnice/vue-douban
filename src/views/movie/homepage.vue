@@ -7,9 +7,6 @@
 </template>
 
 <script>
-import {coming} from '../../assets/data/comming_soon'
-import {top250} from '../../assets/data/top30 '
-import {intheaters} from '../../assets/data/in_theaters'
 import {converToStarsArray} from '../../utils/utils'
 import MovieList from '../../components/movie/movieList'
 
@@ -26,13 +23,13 @@ data(){
   }
 },
 created(){
-this.$axios('/api/movie/in_theaters?city=杭州&count=5').then(res => {
+this.$axios('/api/movie/in_theaters?city=杭州&count=1').then(res => {
 this.processDoubanData(res.data, 'inTheaters')
 })
-this.$axios('/api//movie/top250?start=0&count=5').then(res => {
+this.$axios('/api//movie/top250?start=0&count=1').then(res => {
 this.processDoubanData(res.data, 'top250')
 })
-this.$axios('/api/movie/coming_soon?start=0&count=5').then(res => {
+this.$axios('/api/movie/coming_soon?start=0&count=1').then(res => {
 this.processDoubanData(res.data, 'comingSoon')
 })
 
