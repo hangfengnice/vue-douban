@@ -9,11 +9,11 @@ props: {
   isdisable: Boolean
 },
 created(){
-  console.log(this.isdisable)
+  // console.log(this.isdisable)
 },
 methods: {
   onClickButton(){
-    console.log(1)
+    this.$emit('clickButton')
   }
 }
 }
@@ -30,7 +30,7 @@ button{
   font-size: 15px;
   font-weight: 400;
   outline: none;
-  cursor: not-allowed;
+  // cursor: not-allowed;
 }
 .nodisable{
   background-color: #20af0e;

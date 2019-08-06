@@ -8,3 +8,5 @@
 
 `this.$router.push({name: 'moreMovie', params: { title: this.movies.category}})
 `
+
+- img 不能使用 ::after ::before
