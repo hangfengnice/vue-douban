@@ -1,5 +1,5 @@
 <template>
-  <form v-if='!author'>
+  <form>
     <div v-if="feiSaoMa" data-title="扫码登录" class="css_tips">
       <img @click="changeToSaoMa" class="from_img" :src="imgPhone" alt />
     </div>
@@ -72,7 +72,6 @@ export default {
       isDisabled: true,
       account: "",
       password: "",
-      author: false,
       isAccount: false,
       isPassword: false
     };
@@ -120,7 +119,7 @@ export default {
       const reg = /^[1][0-9]{10}$/
       this.account = e
       this.isAccount = false
-      if(!reg.test(e)){
+      if(e.length>0 && !reg.test(e)){
         this.$notify.warning({
           title: "温馨提示",
           message: '手机号 不符合规范',
@@ -134,7 +133,7 @@ export default {
     loginPassword(e){
       this.password = e
       this.isPassword = false
-      if(e.length < 3){
+      if(e.length>0 && e.length < 3){
         this.$notify.warning({
           title: "温馨提示",
           message: '密码最少需要 3 字符',
@@ -152,7 +151,9 @@ export default {
         password: this.password
        } 
         localStorage.setItem('author', JSON.stringify(author))
-        this.author =  true
+        this.$emit('loginOk', true)
+      }else{
+
       }
       
     }

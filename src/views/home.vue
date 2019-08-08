@@ -2,7 +2,7 @@
   <div class="wrap">
     <HomeHead />
     <!-- login -->
-    <section>
+    <section  v-if='isLoginShow'>
       <div class="app">
         <div class="douban">
           <span class="app-title">豆瓣 6.0</span>
@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="login">
-        <Login />
+        <Login @loginOk='LoginHide' />
       </div>
     </section>
     <!-- book -->
@@ -49,7 +49,8 @@ export default {
   name: "home",
   data() {
     return {
-      showCode: true
+      showCode: true,
+      isLoginShow: true
     };
   },
   components: {
@@ -66,6 +67,9 @@ export default {
     },
     onMouseOut() {
       this.showCode = true;
+    },
+    LoginHide(){
+      this.isLoginShow = false
     }
   }
 };

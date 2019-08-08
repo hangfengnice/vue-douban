@@ -3,7 +3,6 @@
     <input 
       @keyup.enter="OnKeyUP"
       @blur="OnKeyUP"
-      @change='OnKeyUP'
       v-model="password"
       type="password"
       :placeholder="isShow ? '验证码' : '密码'"

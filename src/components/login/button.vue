@@ -1,5 +1,5 @@
 <template>
-<button :disabled='isdisable' :class='{nodisable: !isdisable}' @click='onClickButton'>登录豆瓣</button>
+<button :disabled='isdisable' :class='{nodisable: !isdisable}' @click.prevent='onClickButton'>登录豆瓣</button>
 </template>
 
 <script>
