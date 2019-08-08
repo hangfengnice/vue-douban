@@ -32,10 +32,12 @@ export default {
 <style lang='scss' scoped>
 .index {
   width: 100%;
+  display: flex;
   height: 34px;
   background-color: #fff;
   border-radius: 4px;
   margin-bottom: 10px;
+  align-items: center;
   span {
     font-size: 15px;
     padding: 0 10px;
@@ -43,6 +45,8 @@ export default {
     font-weight: bold;
   }
   input {
+    flex:1;
+    box-sizing: border-box;
     border: none;
     padding: 8px 40px 8px 10px;
   }

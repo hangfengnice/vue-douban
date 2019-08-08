@@ -43,29 +43,9 @@ export default {
           class: "music"
         },
         {
-          title: "小组",
-          path: "/group",
-          class: "group"
-        },
-        {
-          title: "同城",
-          path: "/events",
-          class: "events"
-        },
-        {
-          title: "FM",
-          path: "/fm",
-          class: "fm"
-        },
-        {
-          title: "时间",
-          path: "/time",
-          class: "time"
-        },
-        {
-          title: "豆品",
-          path: "/market",
-          class: "market"
+          title: "点我小谈html,css,js",
+          path: '/study',
+          class:'study'
         }
       ]
     };
@@ -100,7 +80,7 @@ export default {
     a {
       padding-left: 20px;
       text-decoration: none;
-      width: 40px;
+
       height: 20px;
       margin: 0;
       line-height: 1em;
@@ -117,19 +97,7 @@ export default {
     .music {
       color: rgb(215, 126, 30);
     }
-    .group {
-      color: rgb(85, 148, 155);
-    }
-    .events {
-      color: rgb(203, 88, 28);
-    }
-    .fm {
-      color: rgb(172, 211, 196);
-    }
-    .time {
-      color: rgb(75, 75, 75);
-    }
-    .market {
+    .study {
       color: rgb(93, 133, 68);
     }
   }

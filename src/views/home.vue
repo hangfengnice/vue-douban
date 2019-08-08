@@ -60,6 +60,11 @@ export default {
     MusicList,
     BookList
   },
+  created(){
+    if(localStorage.getItem('author')){
+      this.isLoginShow = false
+    }
+  },
 
   methods: {
     onMouseMove() {

@@ -1,6 +1,14 @@
 export default [
   { path: "/", redirect: "/home" },
   {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/login.vue"),
+    meta: {
+      title: "登录"
+    }
+  },
+  {
     path: "/home",
     name: "home",
     component: () => import("../views/home.vue"),
@@ -23,14 +31,6 @@ export default [
         component: () => import("../views/movie/homepage.vue"),
         meta: {
           title: "电影"
-        }
-      },
-      {
-        path: "more/:title",
-        name: "moreMovie",
-        component: () => import("../views/movie/more.vue"),
-        meta: {
-          title: "更多电影"
         }
       },
       {
@@ -90,5 +90,55 @@ export default [
         }
       }
     ]
-  }
+  },
+  {
+    path: "/study",
+    name: "study",
+    component: () => import("../views/study/study.vue"),
+    children: [
+      {
+        path: "html",
+        name: "html",
+        component: () => import("../views/study/html/html.vue"),
+        meta: {
+          title: "html"
+        },
+        children: [
+        {  path: 'domscroll',
+           name: "domscroll",
+           component: () => import("../views/study/html/domscroll.vue"),
+          }
+        ]
+      },
+      {
+        path: "css",
+        name: "css",
+        component: () => import("../views/study/css/css.vue"),
+        meta: {
+          title: "css"
+        },
+        children: [
+          {  path: 'fluid',
+             name: "fluid",
+             component: () => import("../views/study/css/fluid.vue"),
+            }
+          ]
+      },
+      {
+        path: "javascript",
+        name: "javascript",
+        component: () => import("../views/study/js/javascript.vue"),
+        meta: {
+          title: "javascript"
+        },
+        children: [
+          {  path: 'array',
+             name: "array",
+             component: () => import("../views/study/js/array.vue"),
+            }
+          ]
+      }
+    ]
+  },
+
 ];

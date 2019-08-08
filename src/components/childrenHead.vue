@@ -20,7 +20,7 @@
       </span>
     </div>
 
-    <span class="headLogin" @click="$router.push('/login')">登录/注册</span>
+    <span class="headLogin" @click="clickLoginOrLogout">{{loginOrLogout}}</span>
   </div>
 </template>
 
@@ -30,6 +30,7 @@ export default {
   data() {
     return {
       showHideImgBottom: false,
+      loginOrLogout: "登录/注册",
       tags: [
         {
           title: "豆瓣",
@@ -85,12 +86,33 @@ export default {
       ]
     };
   },
+  created(){
+    this.showLoginOrLogout()
+  },
   methods: {
     showHideImg() {
       this.showHideImgBottom = true;
     },
     hideImg() {
       this.showHideImgBottom = false;
+    },
+    showLoginOrLogout(){
+      if(localStorage.getItem('author')){
+      this.loginOrLogout = "退出登录"
+      }else{
+        this.loginOrLogout = '登录/注册'
+      }
+    },
+    clickLoginOrLogout(){
+      switch(this.loginOrLogout){
+        case '登录/注册': 
+       return this.$router.push('/login')
+        case "退出登录": 
+        localStorage.removeItem('author')
+        this.showLoginOrLogout()
+        break;
+      }
+
     }
   }
 };
@@ -154,6 +176,7 @@ export default {
   }
   .headLogin {
       padding-right: 30px;
+      cursor: pointer;
     }
 }
 </style>
